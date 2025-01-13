@@ -46,7 +46,7 @@
 #
 # pylint: disable=line-too-long, bad-whitespace, invalid-name
 
-"""
+"""!
 pi_servo_hat
 ===============
 Python module for the [SparkFun Pi Servo HAT](https://www.sparkfun.com/products/14328) and [SparkFun Servo pHAT for Raspberry Pi](https://www.sparkfun.com/products/15316).
@@ -90,20 +90,19 @@ _AVAILABLE_I2C_ADDRESS = [0x40]
 _DEFAULT_SERVO_FREQUENCY = 50	# Hz
 
 class PiServoHat(object):
-	"""
+	"""!
 	SparkFun PiServoHat
 	Initialise the qwiic_pca9685 python module at ``address`` with ``i2c_driver``.
 
-		:param address:		The I2C address to use for the device.
-							If not provided, the default address is
-							used.
-		:param i2c_driver:	An existing i2c driver object. If not
-							provided a driver object is created.
-		
-		:return:			Constructor Initialization
-							True-	Successful
-							False-	Issue loading I2C driver
-		:rtype:				Bool
+	@param address: The I2C address to use for the device.
+						If not provided, the default address is
+						used.
+	@param i2c_driver: An existing i2c driver object. If not
+						provided a driver object is created.
+
+	@return **Bool** Constructor Initialization
+						True-	Successful
+						False-	Issue loading I2C driver
 	"""
 
 	# Constructor
@@ -137,26 +136,26 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Constructor
 	def __init__(self, address=None, debug = None, min_pt=1, max_pt=2):
-		"""
+		"""!
 		This method initializes the class object. If no 'address' or
 		'i2c_driver' are inputed or 'None' is specified, the method will
 		use the defaults.
 
-		:param address: 	The I2C address to use for the device.
+		@param address: The I2C address to use for the device.
 							If not provided, the method will default to
 							the first address in the
 							'available_addresses' list.
 								Default = 0x40
-		:param debug:		Designated whether or not to print debug
+		@param debug: Designated whether or not to print debug
 							statements.
 							0-	Don't print debug statements
 							1-	Print debug statements
-		:param min_pt:		The minimum pulse time of the servos in 
+		@param min_pt: The minimum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
-							1 ms 
-		:param max_pt:		The maximum pulse time of the servos in 
+							1 ms
+		@param max_pt: The maximum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
-							2 ms 
+							2 ms
 		"""
 		
 		# Did the user specify an I2C address?
@@ -210,20 +209,19 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Check if Connected
 	def is_connected(self):
-		"""
+		"""!
 		Is an I2C connection established with the device?
 
-		:return:	Device Connection Status
+		@return **Bool** Device Connection Status
 					True-	Connected
 					False-	Not Connected
-		:rtype:		Bool
 		"""
 		return self.PCA9685.is_connected()
 
 	#----------------------------------------------
 	# Restart PCA9685
 	def restart(self):
-		"""
+		"""!
 		Soft resets the chip and then clears the MODE1 register to
 		restart the PWM functionality. The PWM frequency is returned to
 		the default 50 Hz setting.
@@ -242,13 +240,12 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Read PWM Frequency
 	def get_pwm_frequency(self):
-		"""
+		"""!
 		Reads the PWM frequency used on outputs. 50 Hz is recommended
 		for most servos.
 
-		:return:	PWM Frequency
+		@return **Integer** PWM Frequency
 					Range: 24 Hz to 1526 Hz
-		:rtype:		Integer
 		"""
 
 		# Get pre-scale value (determines PWM frequency)
@@ -262,22 +259,20 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Change PWM Frequency
 	def set_pwm_frequency(self, frequency = None):
-		"""
+		"""!
 		Configures the PWM frequency used on outputs. 50 Hz is the
 		default and recommended for most servos.
 
-		:param frequency:	PWM Frequency
+		@param frequency: PWM Frequency
 							Range: 24 Hz to 1526 Hz
 
-		:return:	Function Operation
+		@return **Bool** Function Operation
 					True-	Successful
 					False-	Issue in Execution
-		:rtype:		Bool
 
 		NOTE: Changing PWM frequency affects timing for servo
 		positioning. Additionally, the servo position needs to be reset
 		for the output control (on all channels).
-		
 		The output on all channels is initially turned off after the
 		frequency change, but is re-enabled after any of the channels is
 		reconfigured. However, the new PWM frequency will be in affect,
@@ -302,7 +297,7 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Lists the current min and max pulse times
 	def get_pulse_time(self):
-		"""
+		"""!
 		Reads and returns the current min and max pulse times for servo movement
 
 		Returns:
@@ -314,7 +309,7 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Updates the min and max pulse times for all servos by times in milliseconds
 	def set_pulse_time(self, min_pulse_time, max_pulse_time):
-		"""
+		"""!
 		Updates the minimum and maximum pulse widths for the servos
 
 		Args:
@@ -339,20 +334,20 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Moves Servo on Specified Channel to Position (in Degrees)
 	def move_servo_position(self, channel, position, swing = None):
-		"""
+		"""!
 		Moves servo to specified location in degrees.
-		
-		:param channel:		Channel of Servo to Control
+
+		@param channel: Channel of Servo to Control
 							Range: 0 to 15
-		:param position:	Position (Degrees)
+		@param position: Position (Degrees)
 							Range: Open, but should between 0 and
 							specified servo 'swing'. The range is not
 							regulated because most servos have extra
 							room for play (i.e. a 90 degree servo may
 							have a +120 degree usable swing). If 'None'
 							is specified, the default setting is 90
-							degrees. 
-		:param swing:		Range of Servo Movement
+							degrees.
+		@param swing: Range of Servo Movement
 							90-		90 Degree Servo
 							180-	180 Degree Servo
 		"""
@@ -416,12 +411,12 @@ class PiServoHat(object):
 		
 
 	def set_duty_cycle(self, channel, duty_cycle):
-		"""
+		"""!
 		Moves servo to specified location based on duty-cycle.
-		
-		:param channel:		Channel of Servo to Control
+
+		@param channel: Channel of Servo to Control
 							Range: 0 to 15
-		:param duty_cycle:	Duty-Cycle (Percentage)
+		@param duty_cycle: Duty-Cycle (Percentage)
 							Float Range: 0 to 100 (%)
 							Resolution: 1/4096
 		"""
@@ -460,17 +455,16 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Retrieves Servo Position on Specified Channel (in Degrees)
 	def get_servo_position(self, channel, swing = None):
-		"""
+		"""!
 		Reads the specified location for the servo in degrees.
-		
-		:param channel:		Channel of Servo to Control
+
+		@param channel: Channel of Servo to Control
 							Range: 0 to 15
-		:param swing:		Range of Servo Movement
+		@param swing: Range of Servo Movement
 							90-		90 Degree Servo
 							180-	180 Degree Servo
-		
-		:return:			Esitmated Position (Degrees)
-		:rtype:				Float
+
+		@return **Float** Esitmated Position (Degrees)
 		"""
 		
 		# # Check Auto-Increment Bit
@@ -533,7 +527,7 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Sleep PCA9685
 	def sleep(self):
-		"""
+		"""!
 		Set the SLEEP bit to 1, which will unpower the servos. This preserves the life of the servos.
 		"""
 		self.PCA9685.set_sleep_bit(1)
@@ -541,7 +535,7 @@ class PiServoHat(object):
 	#----------------------------------------------
 	# Wake PCA9685
 	def wake(self):
-		"""
+		"""!
 		Set the SLEEP bit to 0, which will power the servos.
 		"""
 		self.PCA9685.set_sleep_bit(0)
