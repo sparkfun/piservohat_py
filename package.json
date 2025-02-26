@@ -1,10 +1,9 @@
 {
     "urls": [
-      ["pi_servo_hat.py", "github:sparkfun/PiServoHat_Py/pi_servo_hat.py"]
-    ],
-    "deps": [
-      ["github:sparkfun/Qwiic_I2C_Py", "master"],
-      ["github:sparkfun/Qwiic_PCA9685_Py", "master"]
+      ["piservohat_py_examples/ex1_full_sweep_with_90_deg_servo.py", "github:sparkfun/piservohat_py/examples/ex1_full_sweep_with_90_deg_servo.py"],
+      ["piservohat_py_examples/ex2_full_sweep_with_180_deg_servo.py", "github:sparkfun/piservohat_py/examples/ex2_full_sweep_with_180_deg_servo.py"],
+      ["piservohat_py_examples/ex3_get_position_180_deg_servo.py", "github:sparkfun/piservohat_py/examples/ex3_get_position_180_deg_servo.py"],
+      ["piservohat_py_examples/ex4_change_pwm_frequency_180_deg_servo.py", "github:sparkfun/piservohat_py/examples/ex4_change_pwm_frequency_180_deg_servo.py"]
     ],
     "version": "0.9.1"
 }
